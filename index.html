@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maquimaior — Máquinas Industriais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --steel-dark:#1c1e1f;
+    --steel:#33373a;
+    --steel-mid:#5a6165;
+    --plate:#e8e5df;
+    --plate-light:#f4f2ee;
+    --safety:#e8a012;
+    --safety-dim:#b9820f;
+    --text-dark:#1c1e1f;
+    --text-light:#f4f2ee;
+    --line:rgba(28,30,31,0.14);
+    --line-light:rgba(244,242,238,0.18);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--plate-light);
+    color:var(--text-dark);
+    font-family:'Archivo',system-ui,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.brand{
+    font-family:'Archivo Expanded',system-ui,sans-serif;
+    letter-spacing:-0.01em;
+  }
+
+  img{max-width:100%;display:block;}
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--steel-dark);
+    border-bottom:3px solid var(--safety);
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 28px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .brand{
+    color:var(--text-light);
+    font-size:1.5rem;
+    font-weight:800;
+    text-decoration:none;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .brand span.dot{
+    display:inline-block;
+    width:10px;
+    height:10px;
+    background:var(--safety);
+    border-radius:1px;
+  }
+  nav{display:flex;gap:32px;}
+  nav a{
+    color:var(--text-light);
+    text-decoration:none;
+    font-size:0.95rem;
+    font-weight:600;
+    opacity:0.85;
+    transition:opacity .15s;
+  }
+  nav a:hover{opacity:1;color:var(--safety);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(28,30,31,0.88), rgba(28,30,31,0.92)),
+      repeating-linear-gradient(135deg, #24262760 0px, #24262760 2px, transparent 2px, transparent 22px);
+    color:var(--text-light);
+    padding:96px 28px 88px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--safety);
+  }
+  .hero-inner{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:48px;
+    align-items:center;
+  }
+  .hero-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--safety);
+    font-weight:700;
+    font-size:0.92rem;
+    margin-bottom:20px;
+  }
+  .hero-tag::before{
+    content:"";
+    width:28px;
+    height:2px;
+    background:var(--safety);
+  }
+  h1.hero-title{
+    font-size:clamp(2.4rem, 5vw, 3.6rem);
+    font-weight:800;
+    line-height:1.04;
+    color:var(--text-light);
+    margin-bottom:22px;
+  }
+  .hero-title em{
+    font-style:normal;
+    color:var(--safety);
+  }
+  .hero-sub{
+    font-size:1.1rem;
+    color:#c9c7c1;
+    max-width:46ch;
+    margin-bottom:34px;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:14px 26px;
+    font-weight:700;
+    font-size:0.95rem;
+    text-decoration:none;
+    border-radius:2px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary{
+    background:var(--safety);
+    color:var(--steel-dark);
+  }
+  .btn-primary:hover{background:#f4b52e;transform:translateY(-1px);}
+  .btn-outline{
+    border:2px solid var(--line-light);
+    color:var(--text-light);
+  }
+  .btn-outline:hover{border-color:var(--safety);color:var(--safety);}
+
+  .hero-plate{
+    background:var(--steel);
+    border:1px solid var(--line-light);
+    padding:28px 26px;
+    border-radius:2px;
+  }
+  .hero-plate-row{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid var(--line-light);
+    font-size:0.92rem;
+  }
+  .hero-plate-row:last-child{border-bottom:none;}
+  .hero-plate-row span:first-child{color:#a9a7a1;}
+  .hero-plate-row span:last-child{color:var(--text-light);font-weight:600;}
+  .hero-plate-head{
+    font-size:0.8rem;
+    letter-spacing:0.06em;
+    color:var(--safety);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:44px;
+    flex-wrap:wrap;
+  }
+  .section-num{
+    color:var(--safety-dim);
+    font-weight:700;
+    font-size:0.9rem;
+    margin-bottom:10px;
+  }
+  h2.section-title{
+    font-size:clamp(1.7rem,3vw,2.3rem);
+    font-weight:800;
+    max-width:20ch;
+  }
+  .section-desc{
+    max-width:38ch;
+    color:var(--steel-mid);
+    font-size:0.98rem;
+  }
+
+  /* ---------- SOBRE ---------- */
+  .sobre{
+    padding:96px 0 80px;
+    border-bottom:1px solid var(--line);
+  }
+  .sobre-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .sobre-grid p{
+    color:var(--steel);
+    font-size:1.05rem;
+    margin-bottom:18px;
+    max-width:52ch;
+  }
+  .stat-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .stat{
+    background:var(--plate-light);
+    padding:26px 22px;
+  }
+  .stat b{
+    display:block;
+    font-family:'Archivo Expanded',sans-serif;
+    font-size:2rem;
+    font-weight:800;
+    color:var(--steel-dark);
+  }
+  .stat span{
+    font-size:0.88rem;
+    color:var(--steel-mid);
+  }
+
+  /* ---------- MAQUINAS ---------- */
+  .maquinas{
+    padding:96px 0 100px;
+    background:var(--plate);
+    border-bottom:1px solid var(--line);
+  }
+  .grid-machines{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:26px;
+  }
+  .card{
+    background:var(--plate-light);
+    border:1px solid var(--line);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .card-img{
+    aspect-ratio:4/3;
+    background:
+      linear-gradient(160deg, var(--steel) 0%, var(--steel-dark) 100%);
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .card-img svg{width:56%;height:56%;opacity:0.85;}
+  .card-badge{
+    position:absolute;
+    top:12px;
+    left:12px;
+    background:var(--safety);
+    color:var(--steel-dark);
+    font-size:0.72rem;
+    font-weight:700;
+    padding:5px 10px;
+    border-radius:2px;
+  }
+  .card-body{
+    padding:22px;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+  }
+  .card-body h3{
+    font-size:1.15rem;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .card-body p{
+    color:var(--steel-mid);
+    font-size:0.92rem;
+    margin-bottom:16px;
+    flex:1;
+  }
+  .card-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    font-size:0.85rem;
+  }
+  .card-meta .price{
+    font-weight:700;
+    color:var(--steel-dark);
+  }
+  .card-meta .status{
+    color:var(--safety-dim);
+    font-weight:600;
+  }
+
+  .add-note{
+    grid-column:1/-1;
+    border:2px dashed var(--steel-mid);
+    background:transparent;
+    padding:38px 24px;
+    text-align:center;
+    color:var(--steel-mid);
+    font-size:0.95rem;
+  }
+  .add-note strong{color:var(--steel-dark);}
+
+  /* ---------- CONTACTOS ---------- */
+  .contactos{
+    padding:96px 0 100px;
+    background:var(--steel-dark);
+    color:var(--text-light);
+  }
+  .contactos .section-desc{color:#b7b5af;}
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:0;
+    border:1px solid var(--line-light);
+  }
+  .contact-list{
+    padding:8px 0;
+  }
+  .contact-item{
+    display:flex;
+    gap:20px;
+    padding:26px 32px;
+    border-bottom:1px solid var(--line-light);
+    align-items:flex-start;
+  }
+  .contact-item:last-child{border-bottom:none;}
+  .contact-icon{
+    width:42px;
+    height:42px;
+    min-width:42px;
+    background:var(--safety);
+    border-radius:2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .contact-icon svg{width:22px;height:22px;stroke:var(--steel-dark);}
+  .contact-item h3{
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+    color:var(--safety);
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .contact-item a, .contact-item p{
+    color:var(--text-light);
+    text-decoration:none;
+    font-size:1.05rem;
+    font-weight:600;
+  }
+  .contact-item .sub{
+    color:#a9a7a1;
+    font-weight:400;
+    font-size:0.9rem;
+    margin-top:4px;
+  }
+  .contact-visual{
+    background:var(--steel);
+    padding:32px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-left:1px solid var(--line-light);
+  }
+  .contact-visual .tag{
+    color:var(--safety);
+    font-weight:700;
+    font-size:0.8rem;
+    letter-spacing:0.05em;
+    margin-bottom:14px;
+  }
+  .contact-visual h3{
+    font-size:1.5rem;
+    font-weight:800;
+    margin-bottom:14px;
+    color:var(--text-light);
+  }
+  .contact-visual p{
+    color:#c9c7c1;
+    font-size:0.95rem;
+    margin-bottom:24px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--steel-dark);
+    padding:28px;
+    border-top:3px solid var(--safety);
+  }
+  .footer-inner{
+    max-width:1180px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .footer-inner p{
+    color:#8f8d87;
+    font-size:0.85rem;
+  }
+  .footer-brand{
+    color:var(--text-light);
+    font-weight:700;
+    font-size:0.95rem;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    nav{display:none;}
+    .hero-inner{grid-template-columns:1fr;}
+    .sobre-grid{grid-template-columns:1fr;gap:36px;}
+    .grid-machines{grid-template-columns:1fr 1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .contact-visual{border-left:none;border-top:1px solid var(--line-light);}
+  }
+  @media (max-width:560px){
+    .grid-machines{grid-template-columns:1fr;}
+    .stat-list{grid-template-columns:1fr;}
+    .hero{padding:72px 20px 64px;}
+    .contact-item{padding:22px 20px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--safety);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#topo" class="brand"><span class="dot"></span>MAQUIMAIOR</a>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#maquinas">Máquinas</a>
+      <a href="#contactos">Contactos</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="topo">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">MÁQUINAS INDUSTRIAIS EM SEGUNDA MÃO</div>
+      <h1 class="hero-title">Equipamento industrial <em>pronto</em> para voltar a trabalhar.</h1>
+      <p class="hero-sub">A Maquimaior reúne máquinas industriais usadas, revistas e prontas a instalar. Consulte o nosso catálogo e entre em contacto diretamente com o vendedor.</p>
+      <div class="hero-actions">
+        <a href="#maquinas" class="btn btn-primary">Ver máquinas disponíveis</a>
+        <a href="#contactos" class="btn btn-outline">Contactar vendedor</a>
+      </div>
+    </div>
+    <div class="hero-plate">
+      <div class="hero-plate-head">FICHA DE CONTACTO</div>
+      <div class="hero-plate-row"><span>Empresa</span><span>Maquimaior</span></div>
+      <div class="hero-plate-row"><span>Telemóvel</span><span>919 429 758</span></div>
+      <div class="hero-plate-row"><span>Localidade</span><span>Rio Maior</span></div>
+      <div class="hero-plate-row"><span>Atendimento</span><span>Dias úteis</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sobre" id="sobre">
+  <div class="wrap">
+    <div class="sobre-grid">
+      <div>
+        <div class="section-num">SOBRE A MAQUIMAIOR</div>
+        <h2 class="section-title">Máquinas com histórico conhecido, prontas para o próximo dono.</h2>
+        <p>A Maquimaior dedica-se à venda de máquinas industriais em segunda mão — equipamento robusto, com histórico de utilização conhecido, para negócios que precisam de capacidade produtiva sem o investimento de equipamento novo.</p>
+        <p>Cada máquina apresentada aqui está disponível para consulta. Fotografias, especificações e condições podem ser combinadas diretamente por telefone ou email.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><b>100%</b><span>Foco em máquinas industriais</span></div>
+        <div class="stat"><b>1</b><span>Ponto de contacto direto</span></div>
+        <div class="stat"><b>Rio Maior</b><span>Localização central</span></div>
+        <div class="stat"><b>Atualiz.</b><span>Catálogo renovado regularmente</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="maquinas" id="maquinas">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">CATÁLOGO</div>
+        <h2 class="section-title">Máquinas disponíveis</h2>
+      </div>
+      <p class="section-desc">Fotografias e fichas técnicas por confirmar — contacte o vendedor para mais detalhes sobre cada equipamento.</p>
+    </div>
+
+    <div class="grid-machines">
+
+      <div class="card">
+        <div class="card-img">
+          <span class="card-badge">Disponível</span>
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="10" stroke="#e8a012" stroke-width="2.5"/>
+            <path d="M32 8v8M32 48v8M56 32h-8M16 32H8M47.6 16.4l-5.6 5.6M22 42l-5.6 5.6M47.6 47.6l-5.6-5.6M22 22l-5.6-5.6" stroke="#e8a012" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Máquina industrial #1</h3>
+          <p>Descrição, marca, modelo e ano a confirmar. Substituir por foto e ficha real do equipamento.</p>
+          <div class="card-meta">
+            <span class="price">Preço sob consulta</span>
+            <span class="status">Em stock</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <span class="card-badge">Disponível</span>
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="20" width="44" height="28" rx="1.5" stroke="#e8a012" stroke-width="2.5"/>
+            <path d="M18 20v-6a4 4 0 014-4h20a4 4 0 014 4v6M22 34h20M22 41h12" stroke="#e8a012" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Máquina industrial #2</h3>
+          <p>Descrição, marca, modelo e ano a confirmar. Substituir por foto e ficha real do equipamento.</p>
+          <div class="card-meta">
+            <span class="price">Preço sob consulta</span>
+            <span class="status">Em stock</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <span class="card-badge">Disponível</span>
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 48h40M18 48V26l14-12 14 12v22" stroke="#e8a012" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M26 48V34h12v14" stroke="#e8a012" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Máquina industrial #3</h3>
+          <p>Descrição, marca, modelo e ano a confirmar. Substituir por foto e ficha real do equipamento.</p>
+          <div class="card-meta">
+            <span class="price">Preço sob consulta</span>
+            <span class="status">Em stock</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contactos" id="contactos">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">FALE CONNOSCO</div>
+        <h2 class="section-title">Contactos</h2>
+      </div>
+      <p class="section-desc">Entre em contacto diretamente para saber mais sobre disponibilidade, preços e visitas.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-list">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <h3>Telemóvel</h3>
+            <a href="tel:+351919429758">919 429 758</a>
+            <p class="sub">Chamada para rede móvel nacional</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+          </div>
+          <div>
+            <h3>Email</h3>
+            <a href="mailto:maquimaior@gmail.com">maquimaior@gmail.com</a>
+            <p class="sub">Resposta em dias úteis</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <h3>Localidade</h3>
+            <p>Avenida dos Combatentes, n.º 107</p>
+            <p class="sub">2040-344 Rio Maior, Portugal</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-visual">
+        <div class="tag">INTERESSADO NUMA MÁQUINA?</div>
+        <h3>Fale connosco por telefone ou email.</h3>
+        <p>A forma mais rápida de confirmar disponibilidade, preço e agendar uma visita é através do telemóvel ou email indicados. Estamos sediados em Rio Maior.</p>
+        <a href="tel:+351919429758" class="btn btn-primary" style="align-self:flex-start;">Ligar agora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">MAQUIMAIOR</span>
+    <p>Avenida dos Combatentes, n.º 107, 2040-344 Rio Maior · 919 429 758 · maquimaior@gmail.com</p>
+  </div>
+</footer>
+
+</body>
+</html>
